@@ -1,0 +1,2 @@
+#define Scrapier_VERSION_MAJOR @Scrapier_VERSION_MAJOR@
+#define Scrapier_VERSION_MINOR @Scrapier_VERSION_MINOR@
