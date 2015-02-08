@@ -1,1 +1,1 @@
-gcc  parser.c lib/mpc/mpc.c -lm -o scrapier
+gcc  scrapier.c lib/mpc/mpc.c -lm -o bin/scrapier

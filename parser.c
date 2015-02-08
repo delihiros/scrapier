@@ -1,15 +1,19 @@
 #include "lib/mpc/mpc.h"
 
-static char buffer[2048];
+mpc_parser_t* Boolean;  
+mpc_parser_t* Numeric;
+mpc_parser_t* Character;
+mpc_parser_t* String;
+mpc_parser_t* Regex;
+mpc_parser_t* Keyword;
+mpc_parser_t* Variable;
+mpc_parser_t* Hashmap;
+mpc_parser_t* List;
+mpc_parser_t* Vector;
+mpc_parser_t* Sequence;
+mpc_parser_t* Expression;
+mpc_parser_t* Scrapier;
 
-char* readline(char* prompt) {
-    fputs(prompt, stdout);
-    fgets(buffer, 2048, stdin);
-    char* cpy = malloc(strlen(buffer)+1);
-    strcpy(cpy, buffer);
-    cpy[strlen(cpy)-1] = '\0';
-    return cpy;
-}
 
 void print_ast(mpc_ast_t* t, int depth){
     int d = 0;
@@ -24,20 +28,20 @@ void print_ast(mpc_ast_t* t, int depth){
     }
 }
 
-int main(){
-    mpc_parser_t* Boolean    = mpc_new("boolean");
-    mpc_parser_t* Numeric    = mpc_new("numeric");
-    mpc_parser_t* Character  = mpc_new("character");
-    mpc_parser_t* String     = mpc_new("string");
-    mpc_parser_t* Regex      = mpc_new("regex");
-    mpc_parser_t* Keyword    = mpc_new("keyword");
-    mpc_parser_t* Variable   = mpc_new("variable");
-    mpc_parser_t* Hashmap    = mpc_new("hashmap");
-    mpc_parser_t* List       = mpc_new("list");
-    mpc_parser_t* Vector     = mpc_new("vector");
-    mpc_parser_t* Sequence   = mpc_new("sequence");
-    mpc_parser_t* Expression = mpc_new("expression");
-    mpc_parser_t* Scrapier   = mpc_new("scrapier");
+void init_parser(){
+    Boolean    = mpc_new("boolean");
+    Numeric    = mpc_new("numeric");
+    Character  = mpc_new("character");
+    String     = mpc_new("string");
+    Regex      = mpc_new("regex");
+    Keyword    = mpc_new("keyword");
+    Variable   = mpc_new("variable");
+    Hashmap    = mpc_new("hashmap");
+    List       = mpc_new("list");
+    Vector     = mpc_new("vector");
+    Sequence   = mpc_new("sequence");
+    Expression = mpc_new("expression");
+    Scrapier   = mpc_new("scrapier");
 
     mpca_lang(MPCA_LANG_DEFAULT,
             "boolean : \"true\" | \"false\" ;\n"
@@ -61,22 +65,9 @@ int main(){
             "           | <sequence> ;"
             "scrapier : /^/ <expression> /$/ ;"
             ,
-            Boolean, Numeric, Character, String, Regex, Keyword, Variable, Hashmap, List, Vector, Sequence, Expression, Scrapier);
+        Boolean, Numeric, Character, String, Regex, Keyword, Variable, Hashmap, List, Vector, Sequence, Expression, Scrapier);
+}
 
-    while (1) {
-        char* input = readline("scrapier> ");
-
-        mpc_result_t r;
-        if (mpc_parse("<stdin>", input, Scrapier, &r)){
-            print_ast(r.output, 0);
-            mpc_ast_delete(r.output);
-        }
-        else {
-            mpc_err_print(r.error);
-            mpc_err_delete(r.error);
-        }
-        free(input);
-    }
+void cleanup_parser(){
     mpc_cleanup(13, Boolean, Numeric, Character, String, Regex, Keyword, Variable, Hashmap, List, Vector, Sequence, Expression, Scrapier);
-    return 0;
 }
