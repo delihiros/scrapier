@@ -7,7 +7,7 @@ mpc_parser_t* Character;
 mpc_parser_t* String;
 mpc_parser_t* Regex;
 mpc_parser_t* Keyword;
-mpc_parser_t* Variable;
+mpc_parser_t* Symbol;
 mpc_parser_t* Hashmap;
 mpc_parser_t* List;
 mpc_parser_t* Vector;
@@ -36,7 +36,7 @@ void init_parser(){
     String     = mpc_new("string");
     Regex      = mpc_new("regex");
     Keyword    = mpc_new("keyword");
-    Variable   = mpc_new("variable");
+    Symbol     = mpc_new("symbol");
     Hashmap    = mpc_new("hashmap");
     List       = mpc_new("list");
     Vector     = mpc_new("vector");
@@ -51,7 +51,7 @@ void init_parser(){
             "string : /\"(\\\\.|[^\"])*\"/ ;"
             "regex : /#\"(\\\\.|[^\"])*\"/ ;"
             "keyword : /:.+/ ;"
-            "variable : /[a-zA-Z0-9><-+*\\/]+/ ;"
+            "symbol  : /[a-zA-Z0-9><-+*\\/]+/ ;"
             "hashmap : '{' (<expression> <expression>)* '}' ;"
             "list : '(' <expression>* ')' ;"
             "vector : '[' <expression>* ']' ;"
@@ -62,13 +62,13 @@ void init_parser(){
             "           | <string>"
             "           | <regex>"
             "           | <keyword>"
-            "           | <variable>"
+            "           | <symbol>"
             "           | <sequence> ;"
             "scrapier : /^/ <expression> /$/ ;"
             ,
-        Boolean, Numeric, Character, String, Regex, Keyword, Variable, Hashmap, List, Vector, Sequence, Expression, Scrapier);
+        Boolean, Numeric, Character, String, Regex, Keyword, Symbol, Hashmap, List, Vector, Sequence, Expression, Scrapier);
 }
 
 void cleanup_parser(){
-    mpc_cleanup(13, Boolean, Numeric, Character, String, Regex, Keyword, Variable, Hashmap, List, Vector, Sequence, Expression, Scrapier);
+    mpc_cleanup(13, Boolean, Numeric, Character, String, Regex, Keyword, Symbol, Hashmap, List, Vector, Sequence, Expression, Scrapier);
 }

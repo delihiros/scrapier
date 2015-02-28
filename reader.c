@@ -16,7 +16,7 @@ lval* lval_add(lval* v, lval* x){
 }
 
 lval* lval_read(mpc_ast_t* t){
-    if (strstr(t->tag, "number")){
+    if (strstr(t->tag, "numeric")){
         return lval_read_num(t);
     }
     if (strstr(t->tag, "symbol")){

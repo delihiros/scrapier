@@ -9,7 +9,7 @@ extern mpc_parser_t* Character;
 extern mpc_parser_t* String;
 extern mpc_parser_t* Regex;
 extern mpc_parser_t* Keyword;
-extern mpc_parser_t* Variable;
+extern mpc_parser_t* Symbol;
 extern mpc_parser_t* Hashmap;
 extern mpc_parser_t* List;
 extern mpc_parser_t* Vector;

@@ -11,7 +11,7 @@ A Language for scraping. Fast booting, easy to use.
 "string : /\"(\\\\.|[^\"])*\"/ ;"
 "regex : /#\"(\\\\.|[^\"])*\"/ ;"
 "keyword : /:.+/ ;"
-"variable : /[a-zA-Z0-9><-+*\\/]+/ ;"
+"symbol : /[a-zA-Z0-9><-+*\\/]+/ ;"
 "hashmap : '{' (<expression> <expression>)* '}' ;"
 "list : '(' <expression>* ')' ;"
 "vector : '[' <expression>* ']' ;"
@@ -22,7 +22,7 @@ A Language for scraping. Fast booting, easy to use.
 "           | <string>"
 "           | <regex>"
 "           | <keyword>"
-"           | <variable>"
+"           | <symbol>"
 "           | <sequence> ;"
 "scrapier : /^/ <expression> /$/ ;"
 ```
