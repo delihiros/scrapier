@@ -1,3 +1,6 @@
+#ifndef __DATA_H__
+#define __DATA_H__
+
 typedef struct lval {
     int type;
     long num;
@@ -16,3 +19,5 @@ extern lval* lval_num(long x);
 extern lval* lval_err(char* m);
 extern lval* lval_list(void);
 extern void lval_del(lval* v);
+
+#endif

@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "string.h"
 
+#include "lib/mpc/mpc.h"
 
 #include "data.h"
 #include "parser.h"
@@ -9,7 +10,6 @@
 #include "printer.h"
 #include "eval.h"
 
-#include "lib/mpc/mpc.c"
 
 
 static char buffer[2048];

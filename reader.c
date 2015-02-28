@@ -1,5 +1,5 @@
-#include "./data.h"
-#include "./lib/mpc/mpc.h"
+#include "data.h"
+#include "lib/mpc/mpc.h"
 
 lval* lval_read_num(mpc_ast_t* t){
     errno = 0;
