@@ -1,5 +1,16 @@
-#include "parser.c"
-#include "eval.c"
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+
+
+#include "data.h"
+#include "parser.h"
+#include "reader.h"
+#include "printer.h"
+#include "eval.h"
+
+#include "lib/mpc/mpc.c"
+
 
 static char buffer[2048];
 
@@ -21,6 +32,9 @@ int main(){
         mpc_result_t r;
         if (mpc_parse("<stdin>", input, Scrapier, &r)){
             print_ast(r.output, 0);
+            lval* x = lval_read(r.output);
+            lval_println(x);
+            lval_del(x);
             mpc_ast_delete(r.output);
         }
         else {
