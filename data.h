@@ -17,6 +17,7 @@ enum { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
 
 extern lval* lval_num(long x);
 extern lval* lval_err(char* m);
+extern lval* lval_sym(char* s);
 extern lval* lval_list(void);
 extern void lval_del(lval* v);
 
