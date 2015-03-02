@@ -8,6 +8,18 @@ lval* lval_read_num(mpc_ast_t* t){
         lval_num(x) : lval_err("invalid number");
 }
 
+lval* lval_read_bool(mpc_ast_t* t){
+    errno = 0;
+    if (strstr(t->contents, "true")){
+        return lval_bool(1);
+    }
+    else if (strstr(t->contents, "false")){
+        return lval_bool(0);
+    }
+    else return lval_err("not a boolean"); // and this should not happen!
+}
+
+
 lval* lval_add(lval* v, lval* x){
     v->count++;
     v->cell = realloc(v->cell, sizeof(lval*) * v->count);
@@ -16,6 +28,9 @@ lval* lval_add(lval* v, lval* x){
 }
 
 lval* lval_read(mpc_ast_t* t){
+    if (strstr(t->tag, "boolean")){
+        return lval_read_bool(t);
+    }
     if (strstr(t->tag, "numeric")){
         return lval_read_num(t);
     }

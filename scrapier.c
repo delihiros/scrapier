@@ -29,7 +29,7 @@ int main(){
 
         mpc_result_t r;
         if (mpc_parse("<stdin>", input, Scrapier, &r)){
-            print_ast(r.output, 0);
+            //print_ast(r.output, 0); // for debugging
             lval* x = lval_read(r.output);
             lval_println(x);
             lval_del(x);
